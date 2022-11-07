@@ -128,11 +128,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="MerkleApp.cpp" />
+    <ClCompile Include="MerkleMain.cpp" />
     <ClCompile Include="OrderBookEntry.cpp" />
     <ClCompile Include="menu.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="menu.h" />
+    <ClInclude Include="MerkleMain.h" />
     <ClInclude Include="OrderBookEntry.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

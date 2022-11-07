@@ -3,12 +3,12 @@
 #include <string>
 #include <vector>
 #include "OrderBookEntry.h"
-#include "menu.h"
+#include "MerkleMain.h"
 
 int main()
 {
     std::vector<OrderBookEntry> orders;
-    ;
+    
     orders.push_back(OrderBookEntry{
         10000,
         0.002,
@@ -17,11 +17,13 @@ int main()
         OrderBookType::bid });
 
     std::cout << orders[0].timestamp << std::endl;
-    std::map<int, void (*)()> menu = setupMenu();
+    MerkleMain app{};
+    app.init();
+
     while (true)
     {
-        int userOption = getUserOption();
-        menu[userOption]();
+        int userOpt = app.getUserOption();
+        std::invoke(app.menu[userOpt], app);
     }
     return 0;
 }
