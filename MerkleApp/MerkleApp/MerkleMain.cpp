@@ -2,19 +2,20 @@
 #include <iostream>
 #include <map>
 #include "MerkleMain.h"
+#include "CSVReader.h"
 
 MerkleMain::MerkleMain() {}
 
+void MerkleMain::loadOrderBook()
+{
+    orders = CSVReader::readCSV("data.csv");
+}
+
 void MerkleMain::init() {
-    menu[0] = &MerkleMain::printMenu;
-    menu[1] = &MerkleMain::printHelp;
-    menu[2] = &MerkleMain::printExchangeStats;
-    menu[3] = &MerkleMain::enterOffer;
-    menu[4] = &MerkleMain::enterBid;
-    menu[5] = &MerkleMain::printWallet;
-    menu[6] = &MerkleMain::gotoNextTimeFrame;
-    menu[7] = &MerkleMain::quit;
+    
+    loadOrderBook();
     printMenu();
+    while (true) std::invoke(menu[getUserOption()], this);
 }
 
 void MerkleMain::printMenu()
@@ -38,9 +39,19 @@ void MerkleMain::printHelp()
     printMenu();
 }
 
-void MerkleMain::printExchangeStats()
+void MerkleMain::printMarketStats()
 {
-    std::cout << "Exchange is online" << std::endl;
+    std::cout << "OrderBook contains : " << orders.size() << " entries " << std::endl;
+    unsigned int bids = 0;
+    unsigned int asks = 0;
+    for (OrderBookEntry& e : orders)
+    {
+        if (e.orderType == OrderBookType::ask)
+            asks++;
+        if (e.orderType == OrderBookType::bid)
+            bids++;        
+    }
+    std::cout << "OrderBook asks : " << asks << " OrderBook bids : " << bids << std::endl;
 }
 
 void MerkleMain::enterOffer()
@@ -75,7 +86,7 @@ int MerkleMain::getUserOption()
     std::cout << std::endl;
     if (!std::cin.good() || !(userOption > 0 && userOption <= 7))
     {
-        std::cout << "Invalid Choice -- Type in 1-6 " << std::endl;
+        std::cout << "Invalid Choice -- Type in 1-7 " << std::endl;
         userOption = 0;
     }
     return userOption;

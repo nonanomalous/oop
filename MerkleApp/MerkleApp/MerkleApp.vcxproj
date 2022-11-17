@@ -127,15 +127,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="MerkleApp.cpp" />
+    <ClCompile Include="CSVReader.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="MerkleMain.cpp" />
     <ClCompile Include="OrderBookEntry.cpp" />
     <ClCompile Include="menu.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CSVReader.h" />
     <ClInclude Include="menu.h" />
     <ClInclude Include="MerkleMain.h" />
     <ClInclude Include="OrderBookEntry.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\..\..\Users\hxr\OneDrive\Documents\UoL\OOP\20200317.csv" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
