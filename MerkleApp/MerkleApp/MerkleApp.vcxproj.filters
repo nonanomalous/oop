@@ -30,6 +30,9 @@
     <ClCompile Include="CSVReader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="OrderBook.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="OrderBookEntry.h">
@@ -44,10 +47,14 @@
     <ClInclude Include="CSVReader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="OrderBook.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\..\..\Users\hxr\OneDrive\Documents\UoL\OOP\20200317.csv">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="test.csv" />
   </ItemGroup>
 </Project>

@@ -62,6 +62,33 @@ std::vector<std::string> CSVReader::tokenise(std::string csvLine, char separator
     return tokens;
 }
 
+OrderBookEntry CSVReader::stringsToOBE(
+    std::string priceString,
+    std::string amountString,
+    std::string timestamp,
+    std::string product,
+    OrderBookType orderType
+)
+{
+    double price, amount;
+    try
+    {
+        price = std::stod(priceString);
+        amount = std::stod(amountString);
+    }
+    catch (const std::exception& e)
+    {
+        std::cout << "CSVReader::stringsToOBE: " << e.what() << '\n';
+        throw;
+    }
+    OrderBookEntry obe{ price,
+        amount,
+        timestamp,
+        product,
+        orderType };
+    return obe;
+}
+
 OrderBookEntry CSVReader::stringsToOBE(std::vector<std::string> tokens)
 {
     if (tokens.size() != 5)
@@ -74,7 +101,15 @@ OrderBookEntry CSVReader::stringsToOBE(std::vector<std::string> tokens)
     {
         price = std::stod(tokens[3]);
         amount = std::stod(tokens[4]);
-        OrderBookEntry obe{ price,
+    }
+    catch (const std::exception& e)
+    {
+        std::cout << "CSVReader::stringsToOBE: " << e.what() << '\n';
+        throw;
+    }
+    try {
+        OrderBookEntry obe{
+            price,
             amount,
             tokens[0],
             tokens[1],
@@ -83,7 +118,7 @@ OrderBookEntry CSVReader::stringsToOBE(std::vector<std::string> tokens)
     }
     catch (const std::exception& e)
     {
-        std::cout << "CSVReader::stringsToOBE: " << e.what() << '\n';
-        throw;
+        std::cout << "Failed initializing OBE";
     }
+
 }

@@ -2,6 +2,7 @@
 #include <map>
 #include <vector>
 #include "OrderBookEntry.h"
+#include "OrderBook.h"
 
 class MerkleMain
 {
@@ -11,7 +12,7 @@ public:
 		{0, &MerkleMain::printMenu},
 		{1, &MerkleMain::printHelp},
 		{2, &MerkleMain::printMarketStats},
-		{3, &MerkleMain::enterOffer},
+		{3, &MerkleMain::enterAsk},
 		{4, &MerkleMain::enterBid},
 		{5, &MerkleMain::printWallet},
 		{6, &MerkleMain::gotoNextTimeFrame},
@@ -20,18 +21,21 @@ public:
 	
 	MerkleMain();	
 	void init();
+
+private:
 	void printMenu();
 	void printHelp();
 	void printMarketStats();
-	void enterOffer();
+	void enterAsk();
 	void enterBid();
 	void printWallet();
 	void gotoNextTimeFrame();
 	int getUserOption();
 	void quit();
 
-private:
-	std::vector<OrderBookEntry> orders;
-	void loadOrderBook();
+	std::string currentTime;
+
+	OrderBook orderBook{"data.csv"};
+	//std::vector<OrderBookEntry> orders;
 };
 
