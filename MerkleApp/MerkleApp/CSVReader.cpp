@@ -22,13 +22,13 @@ std::vector<OrderBookEntry> CSVReader::readCSV(std::string csvFileName)
                 auto obe = CSVReader::stringsToOBE(CSVReader::tokenise(line, ','));
                 entries.push_back(obe);
             }
-            catch (const std::exception& e)
+            catch (...)
             {
-                std::cerr << e.what() << '\n';
+                std::cout << "!";
             }
 
         }
-        std::cout << "CSVReader::readCSV read " << entries.size() << " records." << std::endl;
+        std::cout << std::endl << "CSVReader::readCSV read " << entries.size() << " records." << std::endl;
     }
     else
     {
@@ -93,7 +93,6 @@ OrderBookEntry CSVReader::stringsToOBE(std::vector<std::string> tokens)
 {
     if (tokens.size() != 5)
     {
-        std::cout << "Bad line " << std::endl;
         throw std::exception{};        
     }
     double price, amount;
@@ -102,9 +101,9 @@ OrderBookEntry CSVReader::stringsToOBE(std::vector<std::string> tokens)
         price = std::stod(tokens[3]);
         amount = std::stod(tokens[4]);
     }
-    catch (const std::exception& e)
+    catch (...)
     {
-        std::cout << "CSVReader::stringsToOBE: " << e.what() << '\n';
+        std::cout << "CSVReader::stringsToOBE: " << '\n';
         throw;
     }
     try {

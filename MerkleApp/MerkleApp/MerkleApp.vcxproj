@@ -133,6 +133,7 @@
     <ClCompile Include="OrderBook.cpp" />
     <ClCompile Include="OrderBookEntry.cpp" />
     <ClCompile Include="menu.cpp" />
+    <ClCompile Include="Wallet.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CSVReader.h" />
@@ -140,6 +141,7 @@
     <ClInclude Include="MerkleMain.h" />
     <ClInclude Include="OrderBook.h" />
     <ClInclude Include="OrderBookEntry.h" />
+    <ClInclude Include="Wallet.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\..\..\Users\hxr\OneDrive\Documents\UoL\OOP\20200317.csv" />

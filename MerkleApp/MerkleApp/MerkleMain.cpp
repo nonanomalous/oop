@@ -7,6 +7,7 @@
 MerkleMain::MerkleMain() {}
 
 void MerkleMain::init() {
+    wallet.insertCurrency("BTC", 10);
     currentTime = orderBook.getEarliestTime();
     printMenu();
     while (true) std::invoke(menu[getUserOption()], this);
@@ -109,7 +110,7 @@ int MerkleMain::getUserOption()
     try {
         userOption = std::stoi(line);
     }
-    catch (std::exception& e) {};
+    catch (std::exception& e) { std::cout << e.what() << std::endl; };
 
     if (!std::cin.good() || !(userOption > 0 && userOption <= 7))
     {

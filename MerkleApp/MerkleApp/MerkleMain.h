@@ -3,6 +3,7 @@
 #include <vector>
 #include "OrderBookEntry.h"
 #include "OrderBook.h"
+#include "Wallet.h"
 
 class MerkleMain
 {
@@ -36,6 +37,6 @@ private:
 	std::string currentTime;
 
 	OrderBook orderBook{"data.csv"};
-	//std::vector<OrderBookEntry> orders;
+	Wallet wallet;
 };
 
