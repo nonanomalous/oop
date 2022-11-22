@@ -15,7 +15,8 @@ public:
 		std::string amountString,
 		std::string timestamp,
 		std::string product,
-		OrderBookType orderType
+		OrderBookType orderType,
+		std::string username
 	);
 
 private:

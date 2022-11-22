@@ -61,30 +61,37 @@ void MerkleMain::printMarketStats()
     std::cout << "OrderBook asks : " << asks << " OrderBook bids : " << bids << std::endl;*/
 }
 
-void MerkleMain::enterAsk()
+void MerkleMain::enterOrder(OrderBookType type)
 {
-    std::cout << "Make an ask, enter product, price, amount -- e.g. BTC/ETH,200,0.5" << std::endl;
+    std::cout << "Make an " << OrderBookEntry::typeToStr(type) << ", enter product, price, amount -- e.g. BTC/ETH,200,0.5" << std::endl;
     std::string input;
     std::getline(std::cin, input);
     std::cout << "You typed: " << input << std::endl;
     auto tokens = CSVReader::tokenise(input, ',');
     if (tokens.size() == 3)
     {
-        auto order = CSVReader::stringsToOBE( tokens[1], tokens[2], currentTime, tokens[0], OrderBookType::ask );
-        orderBook.insertOrder(order);
+        auto order = CSVReader::stringsToOBE(tokens[1], tokens[2], currentTime, tokens[0], type, "simuser");
+        if (wallet.canFulfillOrder(order))
+            orderBook.insertOrder(order);
+        else std::cout << "Insufficient funds." << std::endl;
     }
     else
-        std::cout << "enterAsk received bad input!" << std::endl;
+        std::cout << "received bad input!" << std::endl;
+}
+
+void MerkleMain::enterAsk()
+{
+    enterOrder(OrderBookType::ask);
 }
 
 void MerkleMain::enterBid()
 {
-    std::cout << "Make a Bid" << std::endl;
+    enterOrder(OrderBookType::bid);
 }
 
 void MerkleMain::printWallet()
 {
-    std::cout << "Here is your wallet" << std::endl;
+    std::cout << wallet.toString();
 }
 
 void MerkleMain::gotoNextTimeFrame()

@@ -67,7 +67,8 @@ OrderBookEntry CSVReader::stringsToOBE(
     std::string amountString,
     std::string timestamp,
     std::string product,
-    OrderBookType orderType
+    OrderBookType orderType,
+    std::string username
 )
 {
     double price, amount;
@@ -85,7 +86,8 @@ OrderBookEntry CSVReader::stringsToOBE(
         amount,
         timestamp,
         product,
-        orderType };
+        orderType,
+        username};
     return obe;
 }
 
@@ -112,7 +114,8 @@ OrderBookEntry CSVReader::stringsToOBE(std::vector<std::string> tokens)
             amount,
             tokens[0],
             tokens[1],
-            OrderBookEntry::stringToOrderBookType(tokens[2]) };
+            OrderBookEntry::stringToOrderBookType(tokens[2]),
+            "dataset"};
         return obe;
     }
     catch (const std::exception& e)

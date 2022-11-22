@@ -27,6 +27,7 @@ private:
 	void printMenu();
 	void printHelp();
 	void printMarketStats();
+	void enterOrder(OrderBookType type);
 	void enterAsk();
 	void enterBid();
 	void printWallet();

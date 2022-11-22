@@ -1,6 +1,7 @@
 #pragma once
 #include <map>
 #include <string>
+#include "OrderBookEntry.h"
 
 class Wallet
 {
@@ -11,6 +12,12 @@ public:
 
 	/** verify a trade can be covered*/
 	bool containsCurrency(std::string type, double amount);
+
+	/** remove Currency from a wallet */
+	bool removeCurrency(std::string type, double amount);
+
+	/** checks if wallet can cope with ask or bid*/
+	bool canFulfillOrder(const OrderBookEntry& order);
 
 	/** print the wallet contents */
 	std::string toString();
