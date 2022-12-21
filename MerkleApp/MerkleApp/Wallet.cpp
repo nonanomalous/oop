@@ -43,15 +43,44 @@ bool Wallet::removeCurrency(std::string type, double amount)
 
 bool Wallet::canFulfillOrder(const OrderBookEntry& order)
 {
-	std::vector<std::string> currencies = CSVReader::tokenise(order.product, '/');
+	std::vector<std::string> currs = CSVReader::tokenise(order.product, '/');
 
 	if (order.orderType == OrderBookType::ask)
-		return containsCurrency(currencies[0], order.amount);
+		return containsCurrency(currs[0], order.amount);
 
 	if (order.orderType == OrderBookType::bid)
-		return containsCurrency(currencies[1], order.amount * order.price);
+		return containsCurrency(currs[1], order.amount * order.price);
 
 	return false;
+}
+
+void Wallet::processSale(const OrderBookEntry& sale)
+{
+	std::vector<std::string> currs = CSVReader::tokenise(sale.product, '/');
+
+	if (sale.orderType == OrderBookType::asksale)
+	{
+		double outgoingAmount = sale.amount;
+		std::string outgoingCurrency = currs[0];
+		double incomingAmount = sale.amount * sale.price;
+		std::string incomingCurrency = currs[1];
+
+		currencies[incomingCurrency] += incomingAmount;
+		currencies[outgoingCurrency] -= outgoingAmount;
+	}
+
+
+	if (sale.orderType == OrderBookType::bidsale)
+	{
+		double incomingAmount = sale.amount;
+		std::string incomingCurrency = currs[0];
+		double outgoingAmount = sale.amount * sale.price;
+		std::string outgoingCurrency = currs[1];
+
+		currencies[incomingCurrency] += incomingAmount;
+		currencies[outgoingCurrency] -= outgoingAmount;
+	}
+
 }
 
 std::string Wallet::toString()

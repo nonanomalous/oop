@@ -17,7 +17,7 @@ public:
     std::string timestamp;
     std::string product;
     OrderBookType orderType;
-    std::string username = "dataset";
+    std::string username;
 
     static OrderBookType stringToOrderBookType(std::string s);
     static std::string typeToStr(OrderBookType type);
@@ -28,7 +28,7 @@ public:
         std::string _timestamp,
         std::string _product,
         OrderBookType _orderType,
-        std::string _username)
+        std::string _username = "dataset")
         : price(_price), amount(_amount), timestamp(_timestamp), product(_product), orderType(_orderType), username(_username) {};
         
 

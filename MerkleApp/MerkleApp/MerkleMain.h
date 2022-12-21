@@ -37,7 +37,7 @@ private:
 
 	std::string currentTime;
 
-	OrderBook orderBook{"data.csv"};
+	OrderBook orderBook{"20200317.csv"};
 	Wallet wallet;
 };
 

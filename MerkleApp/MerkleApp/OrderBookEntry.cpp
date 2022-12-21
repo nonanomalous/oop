@@ -14,7 +14,8 @@ std::string OrderBookEntry::typeToStr(OrderBookType type)
 	switch (type) {
 	case OrderBookType::ask: return "ask";
 	case OrderBookType::bid: return "bid";
-	case OrderBookType::sale: return "sale";
+	case OrderBookType::bidsale: return "bidsale";
+	case OrderBookType::asksale: return "asksale";
 	}
 	return "unknown";
 }

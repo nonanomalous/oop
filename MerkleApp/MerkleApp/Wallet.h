@@ -19,6 +19,9 @@ public:
 	/** checks if wallet can cope with ask or bid*/
 	bool canFulfillOrder(const OrderBookEntry& order);
 
+	/** update the contents of the wallet */
+	void processSale(const OrderBookEntry& sale);
+
 	/** print the wallet contents */
 	std::string toString();
 
